@@ -6,15 +6,17 @@ body {
 }
 
 main {
-  background-color: green;
 }
 
 div.order-operations-levels-menu {
-  background-color: hsl(48, 100%, 67%);
   padding: 3px 7px;
   border-radius: 7px;
   font-size: 18px;
   cursor: pointer;
+}
+
+div.order-operations-levels-menu:hover {
+  background-color: hsl(48, 100%, 67%);
 }
 
 section.order-operations-display {

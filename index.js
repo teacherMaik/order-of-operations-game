@@ -46,7 +46,13 @@ function shuffleNewLevel(level) {
 }
   */
 
-function startExercise(lvl) {
+$('.dropdown').on('click', (e) => {
+
+  console.log("dropdown clicked");
+  $('.dropdown').toggleClass('is-active');
+})
+
+function startLevel(lvl) {
 
   operationsDisplay.innerHTML = '';
   console.log(lvl);
@@ -190,7 +196,7 @@ function resolveUserAnswer(tempAnswer, tempDisplay) {
         //alert("You completed this 3exercise");
         tempDisplay.remove();
         
-        startExercise(currentLevel);
+        startLevel(currentLevel);
       }
 
     } else if (userAnswer != tempAnswer) {
@@ -327,7 +333,7 @@ levelButtons.forEach(level => {
       console.log("Starting plusMinusLvls1");
       currentLevel = plusMinusLvls1;
 
-      const exData = startExercise(currentLevel);
+      const exData = startLevel(currentLevel);
 
       currentEx = exData[0];
       let remainingEx = exData[1];

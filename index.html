@@ -7,6 +7,7 @@
 	<meta name="description" content="Interactive game developed to teach order of operations">
 	<meta name="keywords" content="Ludoteca En la Nube, Vindrogames, Learning Math, Game Based Learning, Order of Operations Game">
 	<link rel="stylesheet" href="main.css">
+  <script src="https://kit.fontawesome.com/43e3be112e.js" crossorigin="anonymous"></script>
 	<title translate="no">teacherMaik | Order of operations interactive game</title>
 </head>
 
@@ -14,17 +15,30 @@
 	<header id="game-intro" class="section content py-3 mb-0">
 		<h1>Order of operations</h1>
 		<h3 class="m-0">Aprende a dominar el orden de las operaciones y el cálculo mental con nuestro juego interactivo. Tenemos 6 niveles de dificultad y cada nivel tiene varios ejercicios. En cada ejercicio, ganrás puntos por elegir las operaciones en su órden y puntos extra por resolver cada una de las operaciones en el momento.</h2>
-		<h5 class="has-text-centered has-text-info">Elige el nivel de dificultad</h3>
 	</header>
 
 	<main id="order-operations" class="section content py-2 is-flex is-flex-direction-column is-flex-grow-1">
-		<section class="order-operations-levels is-flex is-justify-content-center">
-			<div id="level-1" class="order-operations-levels-menu mx-2">&plus; &minus;</div>
-			<div id="level-2" class="order-operations-levels-menu mx-2">&plus; ( &minus; )</div>
-			<div id="level-3" class="order-operations-levels-menu mx-2">&plus; &minus; &times;</div>
-			<div id="level-4" class="order-operations-levels-menu mx-2">&plus; (&minus;) &times;</div>
-			<div id="level-5" class="order-operations-levels-menu mx-2">&plus; &minus; &times; &divide;</div>
-			<div id="level-6" class="order-operations-levels-menu mx-3">&plus; (&minus;) &times; (&divide;)</div>
+		<section class="order-operations-levels is-flex is-justify-content-center is-align-items-center">
+      <h5 class="has-text-centered has-text-info m-0">Choose difficulty:</h3>
+      <div class="dropdown ml-3">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span>Levels</span>
+            <span class="icon is-small">
+              <i class="fa-solid fa-angle-down"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <div id="level-2" class="order-operations-levels-menu dropdown-item mb-1">&plus; ( &minus; )</div>
+            <div id="level-3" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus; &times;</div>
+            <div id="level-4" class="order-operations-levels-menu dropdown-item mb-1">&plus; (&minus;) &times;</div>
+            <div id="level-5" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus; &times; &divide;</div>
+            <div id="level-6" class="order-operations-levels-menu dropdown-item mb-1">&plus; (&minus;) &times; (&divide;)</div>
+          </div>
+        </div>
+      </div>
 		</section>
 		<section class="order-operations-display is-flex is-justify-content-center is-align-items-center is-flex-grow-1">
 			<div class="operation-container"></div>
