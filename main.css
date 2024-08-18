@@ -15,7 +15,7 @@ div.order-operations-levels-menu {
   cursor: pointer;
 }
 
-div.order-operations-levels-menu:hover {
+div.order-operations-levels-menu:hover, div.order-operations-levels-menu.active {
   background-color: hsl(48, 100%, 67%);
 }
 

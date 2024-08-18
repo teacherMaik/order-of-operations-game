@@ -36,7 +36,7 @@ const plusMinusLvl2 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-plus',
     val: '&plus;',
   },
   {
@@ -46,7 +46,7 @@ const plusMinusLvl2 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-minus',
     val: '&minus;',
   },
   {
@@ -64,7 +64,7 @@ const plusMinusLvl3 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-minus',
     val: '&minus;',
   },
   {
@@ -74,7 +74,7 @@ const plusMinusLvl3 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-plus',
     val: '&plus;',
   },
   {
@@ -92,7 +92,7 @@ const plusMinusLvl4 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-minus',
     val: '&minus;',
   },
   {
@@ -102,7 +102,7 @@ const plusMinusLvl4 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-minus',
     val: '&minus;',
   },
   {
@@ -120,7 +120,7 @@ const plusMinusLvl5 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-plus',
     val: '&plus;',
   },
   {
@@ -130,7 +130,7 @@ const plusMinusLvl5 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-minus',
     val: '&minus;',
   },
   {
@@ -148,7 +148,7 @@ const plusMinusLvl6 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-plus',
     val: '&plus;',
   },
   {
@@ -158,7 +158,7 @@ const plusMinusLvl6 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-minus',
     val: '&minus;',
   },
   {
@@ -168,7 +168,7 @@ const plusMinusLvl6 = [
   },
   {
     type: 'opr',
-    pos: 'opr3',
+    pos: 'opr3-plus',
     val: '&plus;',
   },
   {
@@ -186,7 +186,7 @@ const plusMinusLvl7 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-minus',
     val: '&minus;',
   },
   {
@@ -196,7 +196,7 @@ const plusMinusLvl7 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-plus',
     val: '&plus;',
   },
   {
@@ -206,7 +206,7 @@ const plusMinusLvl7 = [
   },
   {
     type: 'opr',
-    pos: 'opr3',
+    pos: 'opr3-plus',
     val: '&plus;',
   },
   {
@@ -224,7 +224,7 @@ const plusMinusLvl8 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-minus',
     val: '&minus;',
   },
   {
@@ -234,7 +234,7 @@ const plusMinusLvl8 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-minus',
     val: '&minus;',
   },
   {
@@ -244,7 +244,7 @@ const plusMinusLvl8 = [
   },
   {
     type: 'opr',
-    pos: 'opr3',
+    pos: 'opr3-minus',
     val: '&minus;',
   },
   {
@@ -262,7 +262,7 @@ const plusMinusLvl9 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-plus',
     val: '&plus;',
   },
   {
@@ -272,7 +272,7 @@ const plusMinusLvl9 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-plus',
     val: '&plus;',
   },
   {
@@ -282,7 +282,7 @@ const plusMinusLvl9 = [
   },
   {
     type: 'opr',
-    pos: 'opr3',
+    pos: 'opr3-plus',
     val: '&plus;',
   },
   {
@@ -300,7 +300,7 @@ const plusMinusLvl10 = [
   },
   {
     type: 'opr',
-    pos: 'opr1',
+    pos: 'opr1-plus',
     val: '&plus;',
   },
   {
@@ -310,7 +310,7 @@ const plusMinusLvl10 = [
   },
   {
     type: 'opr',
-    pos: 'opr2',
+    pos: 'opr2-minus',
     val: '&minus;',
   },
   {
@@ -320,7 +320,7 @@ const plusMinusLvl10 = [
   },
   {
     type: 'opr',
-    pos: 'opr3',
+    pos: 'opr3-plus',
     val: '&plus;',
   },
   {
@@ -330,7 +330,7 @@ const plusMinusLvl10 = [
   },
   {
     type: 'opr',
-    pos: 'opr4',
+    pos: 'opr4-minus',
     val: '&minus;',
   },
   {

@@ -13,6 +13,7 @@ const plusMinusTimesDivideLvls2 = 'Level 6';
 
 const operationsDisplay = document.querySelector('.operation-container');
 const levelButtons = document.querySelectorAll('.order-operations-levels-menu');
+const levelPointsDisplay = document.getElementById('level-points');
 
 const regexOpr = new RegExp("^.{0,3}");
 const regexOprNum = new RegExp("[1-9]");
@@ -23,6 +24,7 @@ let currentLevel = [];
 let currentEx = [];
 let currentOpr = 1;
 let fibonacchiCount = 1;
+let levelPoints = 0;
 
 /*
 function shuffleNewLevel(level) {
@@ -51,44 +53,6 @@ $('.dropdown').on('click', (e) => {
   console.log("dropdown clicked");
   $('.dropdown').toggleClass('is-active');
 })
-
-function startLevel(lvl) {
-
-  operationsDisplay.innerHTML = '';
-  console.log(lvl);
-  console.log("to be exercise is -> " + lvl[0]);
-
-  let exercise = [];
-  console.log("new exercise is -> " + exercise);
-  console.log("new exercise length is -> " + lvl[0].length);
-  for (var i = 0; i < lvl[0].length; i++) {
-
-    let newP = document.createElement('p');
-
-    console.log(newP);
-    if (lvl[0][i].type === 'num') {
-
-      newP.innerHTML = `${lvl[0][i].val}`;
-      newP.id = `${lvl[0][i].pos}`;
-    } else if (lvl[0][i].type === 'opr') {
-
-      newP.innerHTML = `${lvl[0][i].val}`;
-      newP.classList.add('order-operator');
-      newP.id = `${lvl[0][i].pos}`;
-    }
-
-    exercise.push(newP);
-  }
-
-  for (var j = 0; j < exercise.length; j++) {
-
-    console.log("appending element for exercise");
-    operationsDisplay.appendChild(exercise[j]);
-  }
-  currentLevel.shift();
-  console.log(currentLevel);
-  return [exercise, lvl];
-}
 
 function getFibonacchiPoints(num) {
 
@@ -132,6 +96,8 @@ function animatePoints(event, hit) {
 
     floatingPoints.classList.add('correct');
     let fibonacchiPoints = getFibonacchiPoints(fibonacchiCount);
+    levelPoints = levelPoints + fibonacchiPoints;
+    levelPointsDisplay.textContent = 'Level points: ' + levelPoints;
     floatingPoints.textContent = '+' + fibonacchiPoints + ' pts';
     $('.floating-points').animate({
       opacity: 0,
@@ -139,8 +105,10 @@ function animatePoints(event, hit) {
     }, 2000)
   } else {
 
+    levelPoints--;
     floatingPoints.classList.add('wrong');
     floatingPoints.textContent = '-1';
+    levelPointsDisplay.textContent = 'Level points: ' + levelPoints;
     fibonacchiCount = 1;
     $('.floating-points').animate({
       opacity: 0,
@@ -196,6 +164,7 @@ function resolveUserAnswer(tempAnswer, tempDisplay) {
         //alert("You completed this 3exercise");
         tempDisplay.remove();
         
+        currentOpr = 1;
         startLevel(currentLevel);
       }
 
@@ -317,10 +286,60 @@ function testOperation(event, ex) {
   }
 }
 
+function startLevel(lvl) {
+
+  operationsDisplay.innerHTML = '';
+
+  currentEx = [];
+
+  for (var i = 0; i < lvl[0].length; i++) {
+
+    let newP = document.createElement('p');
+
+    console.log(newP);
+    if (lvl[0][i].type === 'num') {
+
+      newP.innerHTML = `${lvl[0][i].val}`;
+      newP.id = `${lvl[0][i].pos}`;
+    } else if (lvl[0][i].type === 'opr') {
+
+      newP.innerHTML = `${lvl[0][i].val}`;
+      newP.classList.add('order-operator');
+      newP.id = `${lvl[0][i].pos}`;
+    }
+
+    currentEx.push(newP);
+  }
+
+  for (var j = 0; j < currentEx.length; j++) {
+
+    console.log("appending element for currentEx");
+    operationsDisplay.appendChild(currentEx[j]);
+  }
+  currentLevel.shift();
+  
+
+  currentEx.forEach(p => {
+
+    if (regexOpr.exec(p.id)) {
+
+      console.log("adding event listener to opr");
+      p.addEventListener('click', (e) => {
+
+        e.stopPropagation();
+        testOperation(e.target, currentEx);
+      })
+    }
+  });
+}
+
+
 levelButtons.forEach(level => {
 
   level.addEventListener('click', (e) => {
 
+    console.log(e);
+    console.log(e.target);
     levelButtons.forEach(level => {
 
       level.classList.remove('active');
@@ -333,23 +352,7 @@ levelButtons.forEach(level => {
       console.log("Starting plusMinusLvls1");
       currentLevel = plusMinusLvls1;
 
-      const exData = startLevel(currentLevel);
-
-      currentEx = exData[0];
-      let remainingEx = exData[1];
-
-      currentEx.forEach(p => {
-
-        if (regexOpr.exec(p.id)) {
-
-          console.log("adding event listener to opr");
-          p.addEventListener('click', (e) => {
-
-            e.stopPropagation();
-            testOperation(e.target, currentEx);
-          })
-        }
-      });
+      startLevel(currentLevel);
 
     } else if (e.target.id === 'level-2') {
 
