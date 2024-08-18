@@ -56,37 +56,6 @@ function shuffleNewLevel(level) {
 $('.dropdown').on('click', (e) => {
 
   $('.dropdown').toggleClass('is-active');
-
-  const levelToDisplay = e.target.cloneNode(true);
-  levelToDisplay.id = 'level-displayed';
-  currentLevelDisplay.innerHTML = '';
-
-  const progressBarToDisplay = document.createElement('div');
-  progressBarToDisplay.id = "current-level-progress";
-
-  currentLevelDisplay.appendChild(levelToDisplay);
-  currentLevelDisplay.appendChild(progressBarToDisplay);
-
-  for (var i = 0; i < 10; i++) {
-    let progressBar = document.createElement('div');
-    progressBar.id = `current-level-ex-${i}`;
-    progressBar.classList.add('current-level-ex');
-    progressBarToDisplay.appendChild(progressBar);
-  }
-
-  if (e.target.id = 'level-1') {
-    activeLevel = 'level-1';
-  } else if (e.target.id = 'level-2') {
-    activeLevel = 'level-2';
-  } else if (e.target.id = 'level-3') {
-    activeLevel = 'level-3';
-  } else if (e.target.id = 'level-4') {
-    activeLevel = 'level-4';
-  } else if (e.target.id = 'level-5') {
-    activeLevel = 'level-5';
-  } else if (e.target.id = 'level-6') {
-    activeLevel = 'level-6';
-  }
 });
 
 function updateProgressBar(level) {
@@ -401,8 +370,38 @@ levelButtons.forEach(level => {
 
   level.addEventListener('click', (e) => {
 
-    console.log(e);
-    console.log(e.target);
+    console.log(e.target.id);
+    const levelToDisplay = e.target.cloneNode(true);
+    levelToDisplay.id = 'level-displayed';
+    currentLevelDisplay.innerHTML = '';
+
+    const progressBarToDisplay = document.createElement('div');
+    progressBarToDisplay.id = "current-level-progress";
+
+    currentLevelDisplay.appendChild(levelToDisplay);
+    currentLevelDisplay.appendChild(progressBarToDisplay);
+
+    for (var i = 0; i < 10; i++) {
+      let progressBar = document.createElement('div');
+      progressBar.id = `current-level-ex-${i}`;
+      progressBar.classList.add('current-level-ex');
+      progressBarToDisplay.appendChild(progressBar);
+    }
+
+    if (e.target.id === 'level-1') {
+      activeLevel = 'level-1';
+    } else if (e.target.id === 'level-2') {
+      activeLevel = 'level-2';
+    } else if (e.target.id === 'level-3') {
+      activeLevel = 'level-3';
+    } else if (e.target.id === 'level-4') {
+      activeLevel = 'level-4';
+    } else if (e.target.id === 'level-5') {
+      activeLevel = 'level-5';
+    } else if (e.target.id === 'level-6') {
+      activeLevel = 'level-6';
+    }
+
     levelButtons.forEach(level => {
 
       level.classList.remove('active');
@@ -410,26 +409,30 @@ levelButtons.forEach(level => {
 
     level.classList.add('active');
 
-    if (e.target.id === 'level-1') {
+    if (activeLevel === 'level-1') {
 
+      console.log(plusMinusLvls1);
       console.log("Starting plusMinusLvls1");
       currentLevel = plusMinusLvls1;
-
       startLevel(currentLevel);
 
-    } else if (e.target.id === 'level-2') {
+    } else if (activeLevel === 'level-2') {
 
+      console.log("Starting plusMinusLvls2");
+      currentLevel = plusMinusLvls2;
       startLevel(plusMinusLvls2);
-    } else if (e.target.id === 'level-3') {
+    } else if (activeLevel === 'level-3') {
 
+      console.log("Starting plusMinusTimesLvls1");
+      console.log(plusMinusTimesLvls1);
       startLevel(plusMinusTimesLvls1);
-    } else if (e.target.id === 'level-4') {
+    } else if (activeLevel === 'level-4') {
 
       startLevel(plusMinusTimesLvls2);
-    } else if (e.target.id === 'level-5') {
+    } else if (activeLevel === 'level-5') {
 
       startLevel(plusMinusTimesDivideLvls1);
-    } else if (e.target.id === 'level-6') {
+    } else if (activeLevel === 'level-6') {
 
       startLevel(plusMinusTimesDivideLvls2);
     }
