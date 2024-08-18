@@ -182,4 +182,26 @@ div.order-operator-float.wrong {
   main section.order-operations-levels {
     flex-direction: column;
   }
+
+  main section.order-operations-levels h5,
+  main section.order-operations-levels div.dropdown,
+  main section.order-operations-levels div#level-points {
+    margin: 0 !important;
+    margin-bottom: 7px !important;
+  }
+
+  main section div.operation-container p {
+    font-size: 28px !important;
+    height: 28px !important;
+    width: 28px !important;
+  }
+  
+  main section div.operation-container p.order-operator {
+    line-height: 1.5;
+    padding-bottom: 3px;
+  }
+
+  section .operation-container #temp-display {
+    padding: 3px;
+  }
 }
