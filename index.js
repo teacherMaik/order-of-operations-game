@@ -1,5 +1,8 @@
 import { plusMinusLvls1 } from "./order-operations-lvl-1.js";
 
+let plusMinusLvls1Progress = 0;
+let plusMinusLvls1Complete = false; 
+let activeLevel = '';
 
 const plusMinusLvls2 = 'Level 2';
 
@@ -12,7 +15,7 @@ const plusMinusTimesDivideLvls1 = 'Level 5';
 const plusMinusTimesDivideLvls2 = 'Level 6';
 
 const levelButtons = document.querySelectorAll('.order-operations-levels-menu');
-const currentLevelDisplay = document.getElementById('level')
+const currentLevelDisplay = document.getElementById('current-level-display');
 const levelPointsDisplayCurrent = document.getElementById('level-points-current');
 const levelPointsDisplayBest = document.getElementById('level-points-best');
 
@@ -22,7 +25,6 @@ const regexOpr = new RegExp("^.{0,3}");
 const regexOprNum = new RegExp("[1-9]");
 const regexOprType = new RegExp("\-(.*)");
 
-var exstarted = false;
 let currentLevel = [];
 let currentEx = [];
 let currentOpr = 1;
@@ -53,9 +55,63 @@ function shuffleNewLevel(level) {
 
 $('.dropdown').on('click', (e) => {
 
-  console.log("dropdown clicked");
   $('.dropdown').toggleClass('is-active');
+
+  const levelToDisplay = e.target.cloneNode(true);
+  levelToDisplay.id = 'level-displayed';
+  currentLevelDisplay.innerHTML = '';
+
+  const progressBarToDisplay = document.createElement('div');
+  progressBarToDisplay.id = "current-level-progress";
+
+  currentLevelDisplay.appendChild(levelToDisplay);
+  currentLevelDisplay.appendChild(progressBarToDisplay);
+
+  for (var i = 0; i < 10; i++) {
+    let progressBar = document.createElement('div');
+    progressBar.id = `current-level-ex-${i}`;
+    progressBar.classList.add('current-level-ex');
+    progressBarToDisplay.appendChild(progressBar);
+  }
+
+  if (e.target.id = 'level-1') {
+    activeLevel = 'level-1';
+  } else if (e.target.id = 'level-2') {
+    activeLevel = 'level-2';
+  } else if (e.target.id = 'level-3') {
+    activeLevel = 'level-3';
+  } else if (e.target.id = 'level-4') {
+    activeLevel = 'level-4';
+  } else if (e.target.id = 'level-5') {
+    activeLevel = 'level-5';
+  } else if (e.target.id = 'level-6') {
+    activeLevel = 'level-6';
+  }
 });
+
+function updateProgressBar(level) {
+
+  console.log(level);
+
+  if (level == 'level-1') {
+    plusMinusLvls1Progress++;
+
+    let progressBarToColor = document.getElementsByClassName('current-level-ex');
+    console.log(progressBarToColor);
+
+    console.log(progressBarToColor[0]);
+    for (var i = 0; i < plusMinusLvls1Progress; i++) {
+
+      progressBarToColor[i].classList.add('progress-gained');
+    }
+
+    if (plusMinusLvls1Progress === 10) {
+
+      plusMinusLvls1Complete = true;
+      document.getElementById('level-displayed').classList.add('complete');
+    }
+  }
+}
 
 function exerciseComplete(event) {
 
@@ -63,6 +119,8 @@ function exerciseComplete(event) {
   y = event.clientY;
   cleanUpArray();
   initParticles(config.particleNumber, x, y);
+
+  updateProgressBar(activeLevel);
 }
 
 function getFibonacchiPoints(num) {

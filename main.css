@@ -66,6 +66,10 @@ main section #level-display #current-level-display {
   text-align: center;
 }
 
+div#level-displayed.order-operations-levels-menu.complete {
+  background-color: hsl(217, 71%, 53%);
+}
+
 main section #level-display #current-level-progress {
   height: 18px;
   display: flex;
@@ -77,6 +81,10 @@ main section #level-display #current-level-progress .current-level-ex {
   height: 100%;
   border-radius: 7px;
   background-color: hsl(221, 14%, 29%);
+}
+
+main section #level-display #current-level-progress .current-level-ex.progress-gained {
+  background-color: hsl(217, 71%, 53%);
 }
 
 main section #level-points-display {
