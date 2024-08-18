@@ -11,9 +11,12 @@ const plusMinusTimesDivideLvls1 = 'Level 5';
 
 const plusMinusTimesDivideLvls2 = 'Level 6';
 
-const operationsDisplay = document.querySelector('.operation-container');
 const levelButtons = document.querySelectorAll('.order-operations-levels-menu');
-const levelPointsDisplay = document.getElementById('level-points');
+const currentLevelDisplay = document.getElementById('level')
+const levelPointsDisplayCurrent = document.getElementById('level-points-current');
+const levelPointsDisplayBest = document.getElementById('level-points-best');
+
+const operationsDisplay = document.querySelector('.operation-container');
 
 const regexOpr = new RegExp("^.{0,3}");
 const regexOprNum = new RegExp("[1-9]");
@@ -52,7 +55,15 @@ $('.dropdown').on('click', (e) => {
 
   console.log("dropdown clicked");
   $('.dropdown').toggleClass('is-active');
-})
+});
+
+function exerciseComplete(event) {
+
+  var x = event.clientX,
+  y = event.clientY;
+  cleanUpArray();
+  initParticles(config.particleNumber, x, y);
+}
 
 function getFibonacchiPoints(num) {
 
@@ -97,7 +108,7 @@ function animatePoints(event, hit) {
     floatingPoints.classList.add('correct');
     let fibonacchiPoints = getFibonacchiPoints(fibonacchiCount);
     levelPoints = levelPoints + fibonacchiPoints;
-    levelPointsDisplay.textContent = 'Level points: ' + levelPoints;
+    levelPointsDisplayCurrent.textContent = 'Level points: ' + levelPoints;
     floatingPoints.textContent = '+' + fibonacchiPoints + ' pts';
     $('.floating-points').animate({
       opacity: 0,
@@ -108,17 +119,18 @@ function animatePoints(event, hit) {
     levelPoints--;
     floatingPoints.classList.add('wrong');
     floatingPoints.textContent = '-1';
-    levelPointsDisplay.textContent = 'Level points: ' + levelPoints;
+    levelPointsDisplayCurrent.textContent = 'Level points: ' + levelPoints;
     fibonacchiCount = 1;
     $('.floating-points').animate({
       opacity: 0,
       top: 600,
     }, 2000)
-
-    setTimeout(() => {
-      floatingPoints.remove();
-    }, 2000);
   }
+
+  setTimeout(() => {
+    console.log()
+    floatingPoints.remove();
+  }, 2000);
 }
 
 function getTempAnswer(opr1, operation, opr2) {
@@ -137,42 +149,35 @@ function getTempAnswer(opr1, operation, opr2) {
   console.log("not recognizing operation");
 }
 
-function resolveUserAnswer(tempAnswer, tempDisplay) {
+function resolveUserAnswer(tempAnswer, tempDisplay, event) {
 
-  console.log("tempAnswer is " + tempAnswer);
   $('button#temp-submit').on('click', (e) => {
 
     const userAnswer = $('input#temp-input').val();
-    
     if (userAnswer == tempAnswer) {
 
-      console.log("That is correct");
       animatePoints(e.target, true);
 
-      if (currentEx.length > 3) {
-        updateOperationDisplay(userAnswer, currentEx);
-        tempDisplay.remove();
+      setTimeout(() => {
 
-        console.log("CurrentEx length is -> " + currentEx.length);
+        if (currentEx.length > 3) {
 
-        console.log("next exercise is -> " + currentLevel[0]);
-      } else if (currentEx.length <= 3) {
-
-        console.log("CurrentEx length is -> " + currentEx.length);
-
-        console.log("next exercise is -> " + currentLevel[0]);
-        //alert("You completed this 3exercise");
-        tempDisplay.remove();
-        
-        currentOpr = 1;
-        startLevel(currentLevel);
-      }
+          updateOperationDisplay(userAnswer, currentEx);
+          tempDisplay.remove();
+        } else if (currentEx.length <= 3) {
+  
+          currentOpr = 1;
+          exerciseComplete(event);
+          startLevel(currentLevel);
+          tempDisplay.remove();
+        }
+      }, 1000);
 
     } else if (userAnswer != tempAnswer) {
 
       animatePoints(e.target, false);
       console.log("That is incorrrect");
-      tempDisplay.style.backgroundColor = 'rgba(235, 230, 69, 1)';
+      tempDisplay.style.backgroundColor = 'hsl(348, 100%, 61%)';
 
       setTimeout(() => {
 
@@ -214,7 +219,7 @@ function updateOperationDisplay(newNum) {
   }
 }
 
-function displayTempOperation(opr1, operation, opr2) {
+function displayTempOperation(opr1, operation, opr2, event) {
 
   let tempDisplay = document.createElement('div');
   tempDisplay.id = 'temp-display';
@@ -229,7 +234,7 @@ function displayTempOperation(opr1, operation, opr2) {
 
   let tempSubmit = document.createElement('button');
   tempSubmit.id = 'temp-submit';
-  tempSubmit.textContent = 'Comprobar';
+  tempSubmit.textContent = 'Check';
 
   tempDisplay.appendChild(tempOperation);
   tempDisplay.appendChild(tempSubmit);
@@ -240,7 +245,7 @@ function displayTempOperation(opr1, operation, opr2) {
 
   console.log("Temp Answer is " + tempAnswer);
 
-  resolveUserAnswer(tempAnswer, tempDisplay);
+  resolveUserAnswer(tempAnswer, tempDisplay, event);
 
 }
 
@@ -265,7 +270,7 @@ function testOperation(event, ex) {
     animatePoints(event, true);
     setTimeout(() => {
 
-      displayTempOperation(tempOperand1, tempOperation, tempOperand2);
+      displayTempOperation(tempOperand1, tempOperation, tempOperand2, event);
 
       if (ex.length > 3) {
         document.getElementById(ex[ex.indexOf(event) - 1].id).remove();
@@ -372,3 +377,156 @@ levelButtons.forEach(level => {
     }
   });
 })
+
+
+// Explosion Code
+// Little Canvas things
+var canvas = document.querySelector("#canvas"),
+ctx = canvas.getContext('2d');
+
+// Set Canvas to be window size
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+// Configuration, Play with these
+var config = {
+  particleNumber: 800,
+  maxParticleSize: 10,
+  maxSpeed: 40,
+  colorVariation: 50 };
+
+
+// Colors
+var colorPalette = {
+  bg: { r: 12, g: 9, b: 29 },
+  matter: [
+  /* Original colors
+  { r: 36, g: 18, b: 42 }, // darkPRPL
+  { r: 78, g: 36, b: 42 }, // rockDust
+  { r: 252, g: 178, b: 96 }, // solorFlare
+  { r: 253, g: 238, b: 152 } // totesASun
+  */
+
+  { r: 0, g: 209, b: 178 }, // Bulma primary
+  { r: 32, g: 156, b: 238 }, // Bulma info
+  { r: 255, g: 221, b: 87 }, // Bulma Warning
+  { r: 181, g: 181, b: 181}, //Bulma Text Light Gray
+  ] };
+
+
+// Some Variables hanging out
+var particles = [],
+centerX = canvas.width / 2,
+centerY = canvas.height / 2,
+drawBg,
+
+// Draws the background for the canvas, because space
+drawBg = function (ctx, color) {
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+};
+
+// Particle Constructor
+var Particle = function (x, y) {
+  // X Coordinate
+  this.x = x || Math.round(Math.random() * canvas.width);
+  // Y Coordinate
+  this.y = y || Math.round(Math.random() * canvas.height);
+  // Radius of the space dust
+  this.r = Math.ceil(Math.random() * config.maxParticleSize);
+  // Color of the rock, given some randomness
+  this.c = colorVariation(colorPalette.matter[Math.floor(Math.random() * colorPalette.matter.length)], true);
+  // Speed of which the rock travels
+  this.s = Math.pow(Math.ceil(Math.random() * config.maxSpeed), .7);
+  // Direction the Rock flies
+  this.d = Math.round(Math.random() * 360);
+};
+
+// Provides some nice color variation
+// Accepts an rgba object
+// returns a modified rgba object or a rgba string if true is passed in for argument 2
+var colorVariation = function (color, returnString) {
+  var r, g, b, a, variation;
+  r = Math.round(Math.random() * config.colorVariation - config.colorVariation / 2 + color.r);
+  g = Math.round(Math.random() * config.colorVariation - config.colorVariation / 2 + color.g);
+  b = Math.round(Math.random() * config.colorVariation - config.colorVariation / 2 + color.b);
+  a = Math.random() + .5;
+  if (returnString) {
+    return "rgba(" + r + "," + g + "," + b + "," + a + ")";
+  } else {
+    return { r, g, b, a };
+  }
+};
+
+// Used to find the rocks next point in space, accounting for speed and direction
+var updateParticleModel = function (p) {
+  var a = 180 - (p.d + 90); // find the 3rd angle
+  p.d > 0 && p.d < 180 ? p.x += p.s * Math.sin(p.d) / Math.sin(p.s) : p.x -= p.s * Math.sin(p.d) / Math.sin(p.s);
+  p.d > 90 && p.d < 270 ? p.y += p.s * Math.sin(a) / Math.sin(p.s) : p.y -= p.s * Math.sin(a) / Math.sin(p.s);
+  return p;
+};
+
+// Just the function that physically draws the particles
+// Physically? sure why not, physically.
+var drawParticle = function (x, y, r, c) {
+  ctx.beginPath();
+  ctx.fillStyle = c;
+  ctx.arc(x, y, r, 0, 2 * Math.PI, false);
+  ctx.fill();
+  ctx.closePath();
+};
+
+// Remove particles that aren't on the canvas
+var cleanUpArray = function () {
+  particles = particles.filter(p => {
+    return p.x > -100 && p.y > -100;
+  });
+};
+
+
+var initParticles = function (numParticles, x, y) {
+  for (let i = 0; i < numParticles; i++) {
+    particles.push(new Particle(x, y));
+  }
+  particles.forEach(p => {
+    drawParticle(p.x, p.y, p.r, p.c);
+  });
+};
+
+// That thing
+window.requestAnimFrame = function () {
+  return window.requestAnimationFrame ||
+  window.webkitRequestAnimationFrame ||
+  window.mozRequestAnimationFrame ||
+  function (callback) {
+    window.setTimeout(callback, 1000 / 60);
+  };
+}();
+
+
+// Our Frame function
+var frame = function () {
+  // Draw background first
+  drawBg(ctx, colorPalette.bg);
+  // Update Particle models to new position
+  particles.map(p => {
+    return updateParticleModel(p);
+  });
+  // Draw em'
+  particles.forEach(p => {
+    drawParticle(p.x, p.y, p.r, p.c);
+  });
+  // Play the same song? Ok!
+  window.requestAnimFrame(frame);
+};
+
+// Click listener
+document.body.addEventListener("click", function (event) {
+  
+});
+
+// First Frame
+frame();
+
+// First particle explosion
+// initParticles(config.particleNumber);

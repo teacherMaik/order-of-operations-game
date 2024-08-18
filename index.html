@@ -12,47 +12,69 @@
 </head>
 
 <body class="is-flex is-flex-direction-column">
-	<header id="game-intro" class="section content py-3">
-		<h1>Order of operations</h1>
-		<h2 class="">Learn to dominate order of operations. Choose from different levels and complete each exercise:</h2>
+  <canvas id="canvas"></canvas>
+  <header id="game-intro" class="section content py-3">
+    <h1>Order of operations</h1>
+    <h2 class="">Learn to dominate order of operations. Choose from different levels and complete each exercise:</h2>
     <h3 class="">1. - Select the correct operation to complete.</h3>
     <h4 class="">2. - Resolve that operation.</h3>
     <h5 class="">Your points will increase for each correct answer following the fibonacci sequennce. If you make a mistake, you recieve -1 points and the fibonacci sequence resets.</h5>
-	</header>
+  </header>
 
-	<main id="order-operations" class="section content py-2 is-flex is-flex-direction-column is-flex-grow-1">
-		<section class="order-operations-levels is-flex is-justify-content-center is-align-items-center">
-      <h5 class="has-text-centered has-text-info m-0">Choose difficulty:</h3>
-      <div class="dropdown ml-3">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>Levels</span>
-            <span class="icon is-small">
-              <i class="fa-solid fa-angle-down"></i>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <div id="level-1" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus;</div>
-            <div id="level-2" class="order-operations-levels-menu dropdown-item mb-1">&plus; ( &minus; )</div>
-            <div id="level-3" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus; &times;</div>
-            <div id="level-4" class="order-operations-levels-menu dropdown-item mb-1">&plus; (&minus;) &times;</div>
-            <div id="level-5" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus; &times; &divide;</div>
-            <div id="level-6" class="order-operations-levels-menu dropdown-item mb-1">&plus; (&minus;) &times; (&divide;)</div>
+  <main id="order-operations" class="section content py-2 is-flex is-flex-direction-column is-flex-grow-1">
+    <section class="order-operations-levels is-flex is-justify-content-center is-align-items-center">
+      <div id="level-select" class="is-flex is-align-items-center">
+        <h5 class="has-text-centered has-text-info m-0">Choose difficulty:</h5>
+        <div class="dropdown ml-3">
+          <div class="dropdown-trigger">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+              <span>Levels</span>
+              <span class="icon is-small">
+                <i class="fa-solid fa-angle-down"></i>
+              </span>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+              <div id="level-1" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus;</div>
+              <div id="level-2" class="order-operations-levels-menu dropdown-item mb-1">&plus; ( &minus; )</div>
+              <div id="level-3" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus; &times;</div>
+              <div id="level-4" class="order-operations-levels-menu dropdown-item mb-1">&plus; (&minus;) &times;</div>
+              <div id="level-5" class="order-operations-levels-menu dropdown-item mb-1">&plus; &minus; &times; &divide;</div>
+              <div id="level-6" class="order-operations-levels-menu dropdown-item mb-1">&plus; (&minus;) &times; (&divide;)</div>
+            </div>
           </div>
         </div>
       </div>
-      <div id="level-points" class="ml-3">Level points: 0</div>
-		</section>
-		<section class="order-operations-display is-flex is-justify-content-center is-align-items-center is-flex-grow-1">
-			<div class="operation-container"></div>
-		</section>
-	</main>
+      <div id="level-display" class="is-flex is-align-items-center">
+        <div id="current-level-display" class="is-flex is-flex-direction-column">
+          <div id="level-6" class="order-operations-levels-menu dropdown-item mb-1 active">&plus; (&minus;) &times; (&divide;)</div>
+          <div id="current-level-progress">
+            <div id="current-level-ex-1" class="current-level-ex"></div>
+            <div id="current-level-ex-2" class="current-level-ex"></div>
+            <div id="current-level-ex-3" class="current-level-ex"></div>
+            <div id="current-level-ex-4" class="current-level-ex"></div>
+            <div id="current-level-ex-5" class="current-level-ex"></div>
+            <div id="current-level-ex-6" class="current-level-ex"></div>
+            <div id="current-level-ex-7" class="current-level-ex"></div>
+            <div id="current-level-ex-8" class="current-level-ex"></div>
+            <div id="current-level-ex-9" class="current-level-ex"></div>
+            <div id="current-level-ex-10" class="current-level-ex"></div>
+          </div>
+        </div>
+        <div id="level-points-display" class="is-flex is-flex-direction-column is-justify-content-center is-align-items-end">
+          <div id="level-points-current" class="">Current points: 0</div>
+          <div id="level-points-best" class="">Best points: 0</div>
+        </div>
+      </div>
+    </section>
+    <section class="order-operations-display is-flex is-justify-content-center is-align-items-center is-flex-grow-1">
+      <div class="operation-container"></div>
+    </section>
+  </main>
 
-	<footer id="footer">
-	</footer>
-
+  <footer id="footer">
+  </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 	</script>
